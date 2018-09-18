@@ -1,0 +1,68 @@
+html { /*For sticky footer */
+    position: relative;
+    min-height: 100%;
+}
+  
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("../images/background.jpg");
+    margin-bottom: 44px; /*For sticky footer */
+}
+
+h1,h2,h3,
+h4,h5,h6{
+    font-family: 'Raleway', sans-serif !important;
+    color: rgb(0, 223, 223);
+}
+
+h6{
+    font-size: 14px;
+}
+
+
+.udClickable{
+    cursor: pointer;
+}
+
+.udGameSectionHeader{
+    color: black;
+    background-image: linear-gradient(to right,black,rgb(0, 59, 59), rgb(0, 223, 223),rgb(0, 59, 59),black);
+    text-align: center;
+    font-weight: 900;
+}
+
+.udbgBlack{
+    background: black;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 44px;
+}
+
+#mainContainer{
+    background-color: darkgray;
+}
+
+#mainHeaderTextTop,
+#mainHeaderTextBottom{
+    color: black;
+    font-weight: 900;
+    background-image: linear-gradient(to right,black, black, rgb(0, 223, 223), black,black);
+}
+
+#mainHeaderPic{
+    margin: auto;
+    width: 100%;
+}
+
+#FooterThinLine{
+    background-color: rgb(32, 32, 32);
+    padding: 7px;
+}
+
+#FooterThickLine{
+    padding: 15px;
+}
