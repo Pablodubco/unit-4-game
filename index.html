@@ -7,7 +7,7 @@
   <title>RPG - Home</title>
 
   <!-- Link to the jQuery Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- Bootstrap stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -154,8 +154,15 @@
                         <h4 class="text-center bg-dark">Character info</h4>
                         <div class="row align-items-center" id="rowDivCharInfo">
                             <div class="col-sm-6 col-12">
-                                <img class="card-img-top" src="assets/images/Portrait_PlaceHolder.jpg" alt="Placeholder">
-                                <div class="row" id="rowDivCharSkills">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <img class="card-img-top" src="assets/images/Portrait_PlaceHolder.jpg" alt="Placeholder">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-white"><small>Lorem ipsum</small></p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-12">
@@ -189,7 +196,7 @@
                 </div>
 
                 <!-- -----Opponent selection (left) and info (right) BEGIN----- -->
-                <h3 class="udGameSectionHeader" id="oppSlect">Select your opponent</h3>
+                <h3 class="udGameSectionHeader" id="oppSelect">Select your opponent</h3>
                 <div class="row">
                     <div class="col-md-6"> <!-- Available Opponents -->
                         <h4 class="text-center bg-dark">Available Opponents</h4>
@@ -265,64 +272,54 @@
                         <!-- Portraits and animation-->
                         <div class="row align-items-center">
                             <div class="col-6">
-                                <img class="img-fluid text-center" src="assets/images/Portrait_Ahsoka.jpg" alt="AhsokaPortrait">
-                            </div>
-                            <div class="col-6">
-                                <img class="img-fluid text-center" src="assets/images/Portrait_Ahsoka.jpg" alt="AhsokaPortrait">
-                            </div>
-                        </div>
-
-                        <!-- HP Bars-->
-                        <div class="row align-items-center">
-                            <div class="col-6">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="200">HP</div>
+                                <div class="card bg-dark">
+                                    <img class="card-img-top" src="assets/images/Portrait_PlaceHolder.jpg" alt="Placeholder">
+                                    <div class="card-body py-1 px-1">
+                                        <div class="progress bg-secondary py-1">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="200" data-toggle="tooltip" data-html="true" title="Tooltip test">???</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="200">HP</div>
+                                <div class="card bg-dark">
+                                    <img class="card-img-top" src="assets/images/Portrait_PlaceHolder.jpg" alt="Placeholder">
+                                    <div class="card-body py-1 px-1">
+                                        <div class="progress bg-secondary py-1">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="140" aria-valuemin="0" aria-valuemax="200" data-toggle="tooltip" data-html="true" title="Tooltip test">???</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Skills row 1-->
                         <div class = "row align-items-center py-3">
-                            <div class = "col-sm-3 col-6">
-                                <button type="button" class="btn btn-info mx-auto w-75 h-75">Attack</button>
+                            <div class = "col-4">
+                                <button type="button" class="btn btn-info mx-auto w-100 h-75">Attack</button>
                             </div>
-                            <div class = "col-sm-3 col-6">
-
+                            <div class = "col-4">
                             </div>
-                            <div class = "col-sm-3 col-6">
-
-                            </div>
-                            <div class = "col-sm-3 col-6">
-
+                            <div class = "col-4">
                             </div>
                         </div>
 
                         <!-- Skills row 2-->
-                        <div class = "row align-items-center py-1">
-                            <div class = "col-sm-3 col-6">
-                                <button type="button" class="btn btn-info mx-auto w-75 h-75">Attack</button>
+                        <div class = "row align-items-center py-3">
+                            <div class = "col-4">
                             </div>
-                            <div class = "col-sm-3 col-6">
-
+                            <div class = "col-4">
                             </div>
-                            <div class = "col-sm-3 col-6">
-
-                            </div>
-                            <div class = "col-sm-3 col-6">
-
+                            <div class = "col-4">
                             </div>
                         </div>
 
                         <!-- Text message area-->
                         <div class = "row align-items-center py-1">
-                            <div class = "col-12">
-                                    <button type="button" class="btn btn-info mx-auto w-50" id="btnRestart" disabled>Restart Game <i class="fa fa-repeat"></i></button>
-                                <p style="color:white">A random <span style="color:red">message</span> here</p>
+                            <div class = "col-md-4 col-12">
+                                <button type="button" class="btn btn-info mx-auto" id="btnRestart" disabled>Restart <i class="fa fa-repeat"></i></button>
+                            </div>
+                            <div class = "col-md-8 col-12">
+                                <p style="color:white"><small>A random <span style="color:red">message</span> here</small></p>
                             </div>
                         </div>
 
