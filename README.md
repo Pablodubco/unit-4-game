@@ -433,6 +433,7 @@ The [character](#characters-collection) profile bio is a Bootstrap v4 column div
 
 
 **Style settings for stat bars in character profile**
+
 The [character](#characters-collection) profile stats are a Bootstrap column that holds a Bootstrap card. The card has a title (character name), and a background div with foreground progress bars. On top of the progress bars there is a `<span>` for the text
 
 | **Property** | **Format** | **Description** |
@@ -455,6 +456,7 @@ The [character](#characters-collection) profile stats are a Bootstrap column tha
 
 
 **Style settings for skill info divs**
+
 [Skill](#skills-collection) info divs are a Bootstrap v4 column with a header and 2 paragraphs- 
 
 | **Property** | **Format** | **Description** |
@@ -465,6 +467,7 @@ The [character](#characters-collection) profile stats are a Bootstrap column tha
 
 
 **Style settings for battle portraits and HP bar**
+
 [Battle](#battle-phase) portraits are Bootstrap v4 cards that hold an image (battle pic), and a progress container div (unfilled color of progress bars).
 The progress container div holds the HP progress bar and a `<span>` with text displaying the number of remaining HP.
 
@@ -476,6 +479,7 @@ The progress container div holds the HP progress bar and a `<span>` with text di
 
 
 **Style settings for skill buttons**
+
 [Skill](#skills-collection) buttons are a Bootstrap v4 column div with a button. The button class is specified inside the skill's properties.
 
 | **Property** | **Format** | **Description** |
@@ -485,6 +489,7 @@ The progress container div holds the HP progress bar and a `<span>` with text di
 
 
 **Style settings for buffs**
+
 For adjusting the icons of [buffs](#buffs) displayed next to the character battle pic, during battle. Buffs are buttons automatically generated from the triggering skill's properties. They contain an icon depending on the stat effect and number of affected stats. For the current implementation, the icons are fetched from the [Font Awesome](https://fontawesome.bootstrapcheatsheets.com/) bootstrap css.
 
 | **Property** | **Format** | **Description** |
@@ -498,6 +503,7 @@ For adjusting the icons of [buffs](#buffs) displayed next to the character battl
 
 
 **Style settings for battle log**
+
 The battle log is a bootstrap v4 column div that contains paragraphs. Make sure to add the style "overflow-y: scroll" to avoid an ever vertical expanding div. The game code automatically scrolls the position to the last added message.
 
 | **Property** | **Format** | **Description** |
@@ -572,7 +578,9 @@ These are dynamic variable-like properties who's values get overwritten at diffe
 ____________________________________
 
 #### Collections
+
 There are 2 collections: 
+
 * Character objects.
 * Skill objects.
 
@@ -586,6 +594,7 @@ Each have their own set of properties that affect the way they interact with eac
 ___________________________________________________
 
 ##### Characters collection
+
 Specify character objects inside the **_arCharacters_** array of the [game properties](#game-flow-and-properties). 
 
 - [Character object properties](#character-object-properties)
@@ -617,6 +626,7 @@ __________________________________________________
 ###### Character stat properties
 
 There are 3 sets of 7 stat properties (21 properties total) for every character. In listed order, they are named:
+
 1. **HP:** The default behavior of this stat property is to determine defeat or victory conditions. The value is reduced every time the character receives damage when the [mBattleDealDamage](#in-battle-methods) method is called. If it reaches 0 for the player, the [mBattleLose](#in-battle-methods) method is called; if it reaches 0 for the opponent, the [mBattleWin](#in-battle-methods) method is called.
 1. **Attack:** has no default behavior. The behavior depends on the defined damage types and defensive stat values specified inside the _[arDmgTypeAttackProp](#stats-and-skills-settings)_ and _[arDmgTypeDefenseProp](#stats-and-skills-settings)_ game properties, as well as the values assigned to [skill properties](#skills-collection). In the current implementation, it's the offensive stat of the default "Attack" skill, and "weapon" damage type skills.
 1. **Counter:** same as with Attack. No default behavior, just another stat to mess with. In the current implementation, it's the offensive stat for the default "Counter" skill and some special skills.
@@ -645,6 +655,7 @@ The way they interact with skills
 * For a balanced game, the total sum of Base stats should be the same across all characters.
 
 **Game stats (intMaxHP, intAttack, etc)**
+
 * They result in the base stats being multiplied by a certain value specified in the [Stats and skill settings](#stats-and-skills-settings) game properties.
 * They are the ones displayed in the character's stat bars and represent the deafult value of the character's stats.
 * They can also be affected by the caracter level if the property **_intGameCharLevelStatGain_** is higher than 0:
@@ -676,6 +687,7 @@ So, if the game property **_intGameCharLevelStatGain_** value is 0, or the chara
 ___________________________________________________
 
 ##### Skills collection
+
 Skills are assigned to each character inside the [character's skill properties](#characters-collection). They are used to determine the available actions of the player and opponent in every turn. All actions in battle are skill objects, including the defaul attack, counter-attack, and follow-up attack.
 
 Contents:
@@ -692,6 +704,7 @@ Contents:
 | :---: | :---: |
 _________________________________________
 ###### Skill properties
+
 **Skill properties**
 
 Every skill has the following properties:
@@ -725,6 +738,7 @@ Every skill has the following properties:
 
 _________________________________________________
 ###### Damage calculation
+
 **Damage calculation**
 
 1. When the **_skDamageType_** property is anything other than _"none"_, the skill will deal damage to the target specified in the skill's **_skTarget_** property (the caster or the rival).
@@ -749,6 +763,7 @@ For example the Attack skill damage calculation in the current implementation is
 
 __________________________________________________
 ###### Special effects
+
 **Special effects**
 
 * Specify preset special effects inside the **_skSpecialEffect_** array property, these don't affect the battle log text. More than one special effect can be included inside the array: 
@@ -769,6 +784,7 @@ __________________________________________________
 
 ___________________________________________________
 ###### Buffs
+
 **Buffs**
 
 When a skill has _"buff"_ inside the **_skSpecialEffect_** array, it acts differently:
@@ -801,6 +817,7 @@ When a skill has _"buff"_ inside the **_skSpecialEffect_** array, it acts differ
 
 ____________________________________________________________
 ###### Charge time and cooldown
+
 **Charge time and cooldown**
 
 * The **_skChargeTime_** property is the number of turns the skill must wait before being cast again.
@@ -816,6 +833,7 @@ ____________________________________________________________
 
 _________________________________________________________________
 ###### Skill methods
+
 **Skill Methods**
 
 * There are 2 preset skill methods provided in the game, that can give the skills any desired effect through code.
@@ -825,10 +843,14 @@ _________________________________________________________________
     * **rivalObject:** the object of the rival of the caster. All changes done to this object will affect the character.
     * **skMethodAssist:** a utilitty variable-like property to store any single numeric value that the methods might require for later use.
 
+
 **skMethodSpecial**
+
 Runs whenever the skill is cast and _"method"_ is inside the skSpecialEffect string array.
 
+
 **skMethodTurn**
+
 * This method is ignored if the skill has _"buff"_ in the special effects array.
 * It's used in combination with the property **_skTurnRemaining_** for creating special "multi-turn" skills.
 * At the beginning each battle turn, the game loops through the character's skill arrays (the ones used in battle) and runs **_skMethodTurn_** for every skill that has a **_skTurnRemaining_** value greater than 0. **_skTurnRemaining_** is then reduced by 1, until it reaches 0.
@@ -837,6 +859,7 @@ Runs whenever the skill is cast and _"method"_ is inside the skSpecialEffect str
     * Code the **_skMethodSpecial_** function to alter the value of the **_skTurnRemaining_** property to the number of turn desired.
     * Add the code to **_skMethodTurn_**.
     * This way, the special skill code is self contained, without the need to modify the game logic code.
+
 
 **Additional notes on skill methods**
 
@@ -870,6 +893,7 @@ Now, consider that the previous example can be built upon, to create any desired
 ___________________________________________________
 
 #### Methods
+
 A list of methods, their arguments, and general desciption. For any additional details, look inside the javascript file.
 
 - [General utility methods](#general-utility-methods)
@@ -882,36 +906,47 @@ A list of methods, their arguments, and general desciption. For any additional d
 
 ________________________________________________
 ##### General utility methods
+
 **General utility methods**
+
 Methods used for array manipulation at several points during the game.
 
+
 **mReduceArray(array,elements)**
+
 Removes random elements from a provided array until a specified number of elements remain.
 If the provided array has less elements than the specified number, returns it intact.
 _returns: array_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | array | array | An array with any type of elements |
-   | elements | integer | A number that represents the maximum length of the reurned array |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| array | array | An array with any type of elements |
+| elements | integer | A number that represents the maximum length of the reurned array |
+
 
 **mMaxProperty(array,propertyName)**
+
 Returns the max value of a specified property, from a collection of objects within an array that share this property.
 If an object doesn't have this property, it's ignored; if an object has this property but it's not a number, returns _NaN_.
 _returns: number_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | array | array | An array of objects |
-   | propertyName | string | The name of the property being evaluated |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| array | array | An array of objects |
+| propertyName | string | The name of the property being evaluated |
+
 
 **mFindObject(array, property, value)**
+
 Uses the .find() method to fetch the first object in an array to match the condition property == value.
 Returns _undefined_ if none of the objects match the condition.
 _returns: object_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | array | array | An array of objects |
-   | property | string | The name of the property that will have its value matched |
-   | value | string or number | The value against which to match the property's value |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| array | array | An array of objects |
+| property | string | The name of the property that will have its value matched |
+| value | string or number | The value against which to match the property's value |
 
 | [Methods index](#methods) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |
@@ -919,54 +954,78 @@ _returns: object_
 ___________________________________________________
 
 ##### Game flow methods
+
 Methods to control which [game phase](#understanding-the-game-flow) is being executed, and determine the information displayed to the user at every step.
 
+
 **mGameModeStart(mode)**
+
 Main game flow function used to begin a new game, called when choosing a game mode.
 Clears all UI areas from elements, resets character levels, clears skill and buff arrays, and sets game flags to their initial value.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | mode | string | Either _"basic"_ or _"advanced"_ for setting the default game mechanics. Defaults to _"basic"_ if a non valid string is given |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| mode | string | Either _"basic"_ or _"advanced"_ for setting the default game mechanics. Defaults to _"basic"_ if a non valid string is given |
+
 
 **mGameSetStats:function(charObject)**
+
 Sets the [game stats](#character-stat-properties) of the provided character object, depending on game mode, character level, base points and stat multipliers.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid [Character Object](#characters-collection) with the necessary stat properties |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid [Character Object](#characters-collection) with the necessary stat properties |
+
 
 **mGameSetBattleStats:function(charObject)**
+
 Sets the in-battle stats when starting an _advanced_ mode game.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid [Character Object](#characters-collection) with the necessary stat properties |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid [Character Object](#characters-collection) with the necessary stat properties |
+
 
 **mGameRollCharacters()**
+
 Fectches random objects from the [characters collection](#characters-collection) array, the number specified in the **_intGameCharacters_** game property.
+
 Puts those objects inside the **_arGameCharacters_** array.
 Clears the skills, character info, and character portraits from the character selection area. 
 Creates new character portraits based on the objects fetched, and assigns them an on-click event handler to display the character profile, stats and skills info.
 
+
 **mGamePlaceOpponents(charIndex)**
+
 Moves the non-selected characters to the opponents area, by using jQuery to detach the HTML elements from the character section, and attach them to the opponents section. Changes the on-click event handler of the moved portraits by changing the HTML parent elements that contain character info, from the character selection area, to the opponent selection area.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
+
 
 **mGameReselect(charIndex)**
+
 Available at the [Opponent Selection](#understanding-the-game-flow) phase. Removes all HTML elements from the opponent selection area, and returns them to the character selection area. The inverse of the **_mGamePlaceOpponents(charIndex)_** method.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
+
 
 **mGameRestart()**
+
 Clears all areas from the generated HTML elements, calls the **_mGameModeStart_** method, passing the last selected game mode argument.
 
+
 **mGameBeginBattle(charIndex = 0, oppIndex = 0)**
+
 Begins the battle with selected character and opponent. Clears all HTML elements corresponding to the non-selected opponent from the opponent selection area. Creates battle cards with HP bars and skill buttons for the player in the battle area. Assigns on click events for skill buttons that call the methods **_mBattleMove_** for the player's choice and **_mBattleOppMove_** for generating the opponent's choice. Passes both choices as arguments to the method **_mBattleTurn_**.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
-   | charIndex | integer | The index of the player selected opponent, within the **_arGameCharacters_** array |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charIndex | integer | The index of the player selected character, within the **_arGameCharacters_** array |
+| charIndex | integer | The index of the player selected opponent, within the **_arGameCharacters_** array |
 
 | [Methods index](#methods) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |
@@ -976,86 +1035,122 @@ ___________________________________________________
 ##### Dynamic elements methods
 
 **mCreatePicker(charObject,index)**
+
 Creates a card with a character portrait image from a character object.
 _returns: HTML DOM element_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid character object |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid character object |
+
 
 **mCreateInfoPic(charObject)**
+
 Creates a picture profile with bio for the provided character object.
+
 _returns: HTML DOM element_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid character object |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid character object |
+
 
 **mCreateInfoCards(charObject)**
+
 Creates a card with the name and stat bars for the provided character object.
 _returns: HTML DOM element_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid character object |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid character object |
+
 
 **mCreateBattleCard(charObject)**
+
 Creates cards with battle image and HP bars for the provided character object.
 _returns: HTML DOM element_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charObject | object | A valid character object |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charObject | object | A valid character object |
+
 
 **mCreateSkillButton(skillObject,charIndex,oppIndex)**
+
 Creates the Skill button for the player in the battle area.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillObject | object | A valid skill object |
-   | charIndex | integer | The index of the player character object inside the **_arGameCharacters_** array |
-   | oppIndex | integer | The index of the selected opponent object inside the **_arGameCharacters_** array |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillObject | object | A valid skill object |
+| charIndex | integer | The index of the player character object inside the **_arGameCharacters_** array |
+| oppIndex | integer | The index of the selected opponent object inside the **_arGameCharacters_** array |
+
 
 **mDisplayInfoCard(HtmlParentElement, charIndex)**
+
 Appends the elements generated by mCreateInfoPic and mCreateInfoCards inside the specified HTMl element, effectively displaying the info profile of a character. 
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.row_ class. |
-   | charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.row_ class. |
+| charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
 
 **mDisplayInfoSkills(HtmlParentElement, charIndex)**
+
 Creates a div with a header and two paragraphs containing the name, required level and charge time of the skills for a character. Appends the elements to an specified HTML tag, effectively displaying the skills for a character. 
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.row_ class. |
-   | charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.row_ class. |
+| charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
 
 **mDisplayBattleLog(HTMLParentelement,message)**
+
 Appends a paragraph with the desired html content [message] to the specified HTML element.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
+
 
 **mDisplayUpdateHP(charIndex)**
+
 Updates the HP progress bar in the battle card of the indicated character.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charIndex | integer | The index of the character object inside the **_arGameCharacters_** array. |
+
 
 **mDisplayApplyCooldown(skillObject)**
+
 Updates the displayed text of skill buttons with the skill's cooldown property and disables them when the cooldown is larger than 0.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillObject | object | A valid skill object |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillObject | object | A valid skill object |
+
 
 **mDisplayRemoveCooldown(skillObject)**
+
 Enable the skill button of the provided skill.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillObject | object | A valid skill object with a generated skill button |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillObject | object | A valid skill object with a generated skill button |
+
 
 **mDisplayAttachBuff(HTMLParentElement,buffObject, targetIndex)**
+
 Creates a button with an icon and a tooltip describing the [buff](#buffs) effects, appends it to the specified HTML parent element.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
-   | buffObject | object | A valid skill object with a generated skill button |
-   | targetIndex | integer | The index of the character within the **_arGameCharacters_** array that is the target of the buff |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
+| buffObject | object | A valid skill object with a generated skill button |
+| targetIndex | integer | The index of the character within the **_arGameCharacters_** array that is the target of the buff |
 
 | [Methods index](#methods) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |
@@ -1065,102 +1160,138 @@ ___________________________________________________
 ##### In-battle methods
 Methods used during the [battle phase](#understanding-the-game-flow) 
 
+
 **mBattleAssignSkills(charIndex, skillArray)**
+
 Fills in-battle skill arrays for both the player and the opponent with objects cloned from the skills collection array.
 The arrays filled are arCharSkills for the player, and arOppSkills for the opponent.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
-   | buffObject | object | A valid skill object with a generated skill button |
-   | targetIndex | integer | The index of the character within the **_arGameCharacters_** array that is the target of the buff |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| HtmlParentElement | HTML DOM element | It must be a bootstrap v4 div containing the _.col_ class. |
+| buffObject | object | A valid skill object with a generated skill button |
+| targetIndex | integer | The index of the character within the **_arGameCharacters_** array that is the target of the buff |
+
 
 **mBattleMove(skillname, skillCasterIndex, skillRivalIndex)**
+
 Returns a choice object that represents the selected move in battle. Each choice containing 3 objects: caster, rival, and selected skill.
 _returns: object{skill object, caster object, rival object}_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillname | string | The unique string value in the **_skName_** property of the skill being cast. |
-   | skilCasterIndex | integer | The index of the character within the **_arGameCharacters_** array that is casting the skill. |
-   | skilRivalIndex | integer | The index of the character within the **_arGameCharacters_** array that is the current rival of the skill caster. |
 
-   **mBattleOppMove(skillCasterIndex, skillRivalIndex)**
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillname | string | The unique string value in the **_skName_** property of the skill being cast. |
+| skilCasterIndex | integer | The index of the character within the **_arGameCharacters_** array that is casting the skill. |
+| skilRivalIndex | integer | The index of the character within the **_arGameCharacters_** array that is the current rival of the skill caster. |
+
+
+**mBattleOppMove(skillCasterIndex, skillRivalIndex)**
+
 Builds an array of possible moves for the PC controlled opponent on the current turn and the next turn, estimates damage, and puts the array elements through a desicion tree to select a suitable move given the current battle conditions. Returns a choice object that represents the selected move in battle. Each choice containing 3 objects: caster, rival, and selected skill.
+
 _returns: object{skill object, caster object, rival object}_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skilCasterIndex | integer | The index of the character within the **_arGameCharacters_** array that is casting the skill. |
-   | skilRivalIndex | integer | The index of the character within the **_arGameCharacters_** array that is the current rival of the skill caster. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skilCasterIndex | integer | The index of the character within the **_arGameCharacters_** array that is casting the skill. |
+| skilRivalIndex | integer | The index of the character within the **_arGameCharacters_** array that is the current rival of the skill caster. |
+
 
 **mBattleTurnBasic(skillName, charIndex, oppIndex)**
+
 The Basic Game turn. Triggered when the player selects the default action specified in the **_strDefaultSkill_** character object property. Player attacks, opponent counter attacks, player character attack increses.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillName | string | The unique string value in the **_skName_** property of the skill being cast. |
-   | charIndex | integer | The index of the player character within the **_arGameCharacters_** array. |
-   | opplIndex | integer | The index of the opponent within the **_arGameCharacters_** array. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillName | string | The unique string value in the **_skName_** property of the skill being cast. |
+| charIndex | integer | The index of the player character within the **_arGameCharacters_** array. |
+| opplIndex | integer | The index of the opponent within the **_arGameCharacters_** array. |
+
 
 **mBattleTurn(charMove, oppMove)**
+
 The Advanced Game turn. Triggered when the player selects an action (skill button). First, it will execute the effects of passive multi-turn skills (_[buffs](#buffs)_ and skills with _[skMethodTurn](#skill-methods)_). Then, it will determine which charactter moves first, and pass both the player's and PC controlled opponent choices to the **_mBattleTurnResolve_** method for executing them, as the first and second move. Finally, it will return the affected in-battle stats of both characters to their original values.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charMove | object | A valid _choice object_ containing the player character object, the player selected selected skill object, and the rival object. |
-   | oppMove | object | A valid _choice object_ containing the opponent character object, the opponent selected skill object, and the rival object. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charMove | object | A valid _choice object_ containing the player character object, the player selected selected skill object, and the rival object. |
+| oppMove | object | A valid _choice object_ containing the opponent character object, the opponent selected skill object, and the rival object. |
 
 
 **mBattleTurnResolve(firstMove, secondMove)**
+
 Resolves the turn actions by executing the player and opponent's skill effects in order. Calls on the method mBattleUseSkill with the firstMove and secondMove objects in turn and checks for _"nomove"_ [special effect](#special-effects) in skills.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | firstMove | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
-   | secondMove | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| firstMove | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
+| secondMove | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
 
 **mBattleUseSkill(moveObject)**
+
 Executes the move in battle. Applies damage and effects of the selected skill, including follow-ups and counters.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | moveObject | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| moveObject | object | A valid _choice object_ containing the caster object, the selected skill object, and the rival object. |
+
 
 **mBattleDealDamage(target, damage)**
+
 Reduces the target's Hit Points by the indicated amount. Everytime this happens, runs updates on the target's HP bar display, and checks victory / loss conditions.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | target | object | A valid _[character object](#character_object_properties)_ which is the target of the damage being dealt. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| target | object | A valid _[character object](#character_object_properties)_ which is the target of the damage being dealt. |
+
 
 **mBattleDamage(skillObject, caster, target)**
+
 Damage calculator for a given skill that deals damage.
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillObject | object | A valid _[skill object](#skill-properties)_ which represents the skill being cast. |
-   | caster | object | A valid _[character object](#character_object_properties)_ which represents the caster of the skill. |
-   | target | object | A valid _[character object](#character_object_properties)_ which represents the target of the skill being cast. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillObject | object | A valid _[skill object](#skill-properties)_ which represents the skill being cast. |
+| caster | object | A valid _[character object](#character_object_properties)_ which represents the caster of the skill. |
+| target | object | A valid _[character object](#character_object_properties)_ which represents the target of the skill being cast. |
+
 
 **mBattleMessageEffect(buffObject, target)**
+
 For buffs, the syntax constructor for battle log messages of buffs that deal damage.
 _returns: string_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | buffObject | object | A valid _[buff object](#buffs)_ which represents the skill being cast. |
-   | target | object | A valid _[character object](#character_object_properties)_ which represents the target of the buff damage. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| buffObject | object | A valid _[buff object](#buffs)_ which represents the skill being cast. |
+| target | object | A valid _[character object](#character_object_properties)_ which represents the target of the buff damage. |
+
 
 **mBattleMessage(skillObject, caster, target, damage)**
+
 For skills, the syntax constructor for battle log messages of active skills.
 _returns: string_
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | skillObject | object | A valid _[skill object](#skill-properties)_ which represents the skill being cast. |
-   | caster | object | A valid _[character object](#character_object_properties)_ which represents the caster of the skill. |
-   | target | object | A valid _[character object](#character_object_properties)_ which represents the target of the buff damage. |
-   | damage | integer | The amount of damage dealt by the skill, if any. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| skillObject | object | A valid _[skill object](#skill-properties)_ which represents the skill being cast. |
+| caster | object | A valid _[character object](#character_object_properties)_ which represents the caster of the skill. |
+| target | object | A valid _[character object](#character_object_properties)_ which represents the target of the buff damage. |
+| damage | integer | The amount of damage dealt by the skill, if any. |
+
 
 **mBattleLose()**
+
 Called when the player character's HP reaches 0 before the opponent's. Displays the game over message and disables all buttons except for _Restart Game_.
 
 
 **mBattleWin(charIndex)**
+
 Called when the opponent's HP reaches 0 before the player's character. If it's the last opponent, displays the game victory message and disables all buttons except for _Restart Game_; otherwise displays an "opponent defeated" message and goes to the [Opponent Selection Phase](#opponent-selection-phase).
-   | **Arguments** | **Format** | **Description** |
-   | --- | --- | --- |
-   | charIndex | integer | The index of the defeated opponent inside the **_arGameCharacters_** array. |
+
+| **Arguments** | **Format** | **Description** |
+| --- | --- | --- |
+| charIndex | integer | The index of the defeated opponent inside the **_arGameCharacters_** array. |
 
 | [Methods index](#methods) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |
