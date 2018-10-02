@@ -1,9 +1,11 @@
 # TURNED BASED RPG BATTLE GAME
+
 Example code, intensive in jQuery and dynamic UI elements, for creating a Turned Based Battle Engine with a lot of configurable settings. The current implementation uses a Star Wars Clone Wars theme for characters, skills, and damage types.
 
 [Try it here](https://pablodubco.github.io/unit-4-game/)
 
 ## Contents:
+
 - [1 GENERAL DESCRIPTION](#general-description)
    - [1.1 Basic Game](#basic-game)
    - [1.2 Advanced Game](#advanced-game)
@@ -25,11 +27,13 @@ Example code, intensive in jQuery and dynamic UI elements, for creating a Turned
 
 
 ## GENERAL DESCRIPTION
+
 The example application has 2 modes:
 * Basic
 * Advanced
 
 ### Basic Game
+
 The current implementation has the following rules:
 
 1. Fetch 4 random characters from the general character collection.
@@ -43,9 +47,10 @@ The current implementation has the following rules:
 1. Win by defeating all opponents, lose by running out of HP before defeating all other 3 characters.
 1. To beat the game, carefully select your character and the order of your opponents.
 
->Note: Not every character can win every game, but in every game there is at least 1 combination of character and opponents that results in a victory. The challenge is to decide which character to pick, and the order in which to defeat the opponents. Since the characters are chosen at random, some games might prove more challenging than others.
+>**NOTE:** Not every character can win every game, but in every game there is at least 1 combination of character and opponents that results in a victory. The challenge is to decide which character to pick, and the order in which to defeat the opponents. Since the characters are chosen at random, some games might prove more challenging than others.
 
 ### Advanced Game
+
 The current implementation has the following rules:
 
 1. Fetch 4 random characters from the general character collection.
@@ -206,7 +211,7 @@ window.onload = function(){
 }
 ```
 
->NOTE: the game is set to be easily configurable by edditing the values in its properties, without needing to mess with a single line of code in the game logic methods. 
+>**NOTE:** the game is set to be easily configurable by edditing the values in its properties, without needing to mess with a single line of code in the game logic methods. 
 >Practically all strings, classes, characters, skills, damage types and stat names can be altered by changing the desired property value. The next sections go over how the game logic works, and how to change every possible configuration. 
 
 > A footprint to follow when making an extensive theming of the battle game: 
@@ -368,7 +373,7 @@ The following properties can be changed to affect the **general behavior** of th
 | boolGameOpponentLevelUP | boolean | If true, opponents also level up after every battle. |
 | boolGameCharStartLevel | boolean | If true, the selected character's **_intCharStartLevel_** property will be ignored and the starting level of the selected character is always 0. See [characater section](#characters-collection) for details. |
 
-Changing the values of these parameters can drastically affect the game difficulty. For example, the game can be set to have many more characters to select from and fight against (current setting is 4 characters), and prevent HP recovery after every battle, have only the player character start at level 0, or only have the player character level up after every battle.
+>**NOTE:** Changing the values of these parameters can drastically affect the game difficulty. For example, the game can be set to have many more characters to select from and fight against (current setting is 4 characters), and prevent HP recovery after every battle, have only the player character start at level 0, or only have the player character level up after every battle.
 
 | [Game properties index](#game-flow-and-properties) | [Main index](#contents) |
 | :---: | :---: |
@@ -380,6 +385,7 @@ _____________________________________________
 The following properties affect the **UI elements displayed**:
 
 **Displayed strings**
+
 General strings for [stats](#character-stat-properties), tooltips, [victory and defeat](#victory-or-defeat-phase) messages.
 
 | **Property** | **Format** | **Description** |
@@ -403,7 +409,9 @@ General strings for [stats](#character-stat-properties), tooltips, [victory and 
 | strShortForceDefense | string | Short 3-5 length name for the Force Defense stat in stat bars and buff tooltips. |
 | strShortSpeed | string | Short 3-5 length name for the Speed stat in stat bars and buff tooltips. |
 
+
 **Style settings for character portraits**
+
 [Character](#characters-collection) portraits are a Bootstrap column div container, that holds a Bootstrap card div, that has an image tag with the character portrait.
 
 | **Property** | **Format** | **Description** |
@@ -412,7 +420,9 @@ General strings for [stats](#character-stat-properties), tooltips, [victory and 
 | strPortraitCard | string | Classes for the card that holds the portrait image. |
 | strPickerHighlight | string | Style used to highlight the portrait when selected. |
 
+
 **Style settings for bio profiles in character profile**
+
 The [character](#characters-collection) profile bio is a Bootstrap v4 column div that contains an image in the first row, and a paragraph with text in the second row.
 
 | **Property** | **Format** | **Description** |
@@ -420,6 +430,7 @@ The [character](#characters-collection) profile bio is a Bootstrap v4 column div
 | strBioColClass| string | Bootstrap v4 column classes for the bio profile container. |
 | strBioImgClass| string | Classes for the bio profile image. |
 | strBioTextClass| string | Classes for the bio profile text. |
+
 
 **Style settings for stat bars in character profile**
 The [character](#characters-collection) profile stats are a Bootstrap column that holds a Bootstrap card. The card has a title (character name), and a background div with foreground progress bars. On top of the progress bars there is a `<span>` for the text
@@ -440,7 +451,8 @@ The [character](#characters-collection) profile stats are a Bootstrap column tha
 | strBarColorFDefense | string | Color class of stat bar for Force Defense. |
 | strBarColorSpeed | string | Color class of stat bar for Speed. |
 
->NOTE: avoid using a background color for the strSpanProgressBarText class. Otherwise, it will cover the progress bar, or use one with transparency.
+>**NOTE:** avoid using a background color for the strSpanProgressBarText class. Otherwise, it will cover the progress bar, or use one with transparency.
+
 
 **Style settings for skill info divs**
 [Skill](#skills-collection) info divs are a Bootstrap v4 column with a header and 2 paragraphs- 
@@ -450,6 +462,7 @@ The [character](#characters-collection) profile stats are a Bootstrap column tha
 | strSkInfoDivClass| string | Bootsrap v4 column classes for the div that contains skill info |
 | strSkInfoNameClass| string | Classes for the skill header name inside the skill info |
 | strSkInfoTextClass| string | Classes for the skill text with required level and charge times inside the skill info |
+
 
 **Style settings for battle portraits and HP bar**
 [Battle](#battle-phase) portraits are Bootstrap v4 cards that hold an image (battle pic), and a progress container div (unfilled color of progress bars).
@@ -461,6 +474,7 @@ The progress container div holds the HP progress bar and a `<span>` with text di
 | strBarBattleHP | string | Classes for the in-battle big HP bar |
 | strSpanBarBattleText | string | Classes for the in-batlle HP bar text |
 
+
 **Style settings for skill buttons**
 [Skill](#skills-collection) buttons are a Bootstrap v4 column div with a button. The button class is specified inside the skill's properties.
 
@@ -468,6 +482,7 @@ The progress container div holds the HP progress bar and a `<span>` with text di
 | --- | :---: | --- |
 | strSkBtnDivClass| string | Bootstrap v4 column classes for the div container that will hold skill buttons |
 | strSkBtnClass| string | Classes for the skill button |
+
 
 **Style settings for buffs**
 For adjusting the icons of [buffs](#buffs) displayed next to the character battle pic, during battle. Buffs are buttons automatically generated from the triggering skill's properties. They contain an icon depending on the stat effect and number of affected stats. For the current implementation, the icons are fetched from the [Font Awesome](https://fontawesome.bootstrapcheatsheets.com/) bootstrap css.
@@ -481,6 +496,7 @@ For adjusting the icons of [buffs](#buffs) displayed next to the character battl
 | strBuffIconDownDown| string | Icon class for a buff that lowers 2 stats |
 | strBuffIconDamage| string | Icon class for a buff that deals damage |
 
+
 **Style settings for battle log**
 The battle log is a bootstrap v4 column div that contains paragraphs. Make sure to add the style "overflow-y: scroll" to avoid an ever vertical expanding div. The game code automatically scrolls the position to the last added message.
 
@@ -488,7 +504,7 @@ The battle log is a bootstrap v4 column div that contains paragraphs. Make sure 
 | --- | :---: | --- |
 | strBattleLogClass | string | Classes for the battle log text |
 
->Note: These properties are mainly used for styling and spacing (margins, padding, backgrounds, colors, etc.). Some properties affect Bootstrap v4 column classes, and can slightly alter the layout of elements (for example, placing the ). However, a more in-depth  
+>Note: These properties are mainly used for styling and spacing (margins, padding, backgrounds, colors, etc.). Some properties affect Bootstrap v4 column classes, and can slightly alter the layout of elements (for example, placing elements side by side). However, a more in-depth modification requires digging through the [dynamic elements methods](#dynamic-elements-methods).
 
 | [Game properties index](#game-flow-and-properties) | [Main index](#contents) |
 | :---: | :---: |
@@ -518,7 +534,7 @@ The following properties affect the character object's **in-game stats and skill
 | arDmgTypeAttackProp | strings array | Array of damage type properties for skills. See [skills section](#skills-collection) for details. |
 | arDmgTypeDefenseProp | strings array | Array of character defensive stats for reducing each damage type. It must match the order and length of the **_arDmgTypeAttackProp_** array game property. See [characater section](#characters-collection) for the stat property names. |
 
->**NOTE:** The **_arDmgTypeAttackProp_** and **_arDmgTypeDefenseProp_** properties, in conjunction with the [display elements settings](#display-elements-settings), and the [skills collection](#skills-collection) can be used to ompletely alter the theme and damage rules of the game, from every possible damage type and the deffensive stat used, to the displayed name of every stat. For example: 
+>**NOTE:** The **_arDmgTypeAttackProp_** and **_arDmgTypeDefenseProp_** properties, in conjunction with the [display elements settings](#display-elements-settings), and the [skills collection](#skills-collection) can be used to completely alter the theme and damage rules of the game, from every possible damage type and the deffensive stat used, to the displayed name of every stat. For example: 
 >* Doing a classic medieval RPG battle game using "physical" and "magic" instead of "weapon" and "force". 
 >* Post apocalyptic battle game, using "firearms", "energy weapons", "radiation resistance", etc. as stats.
 >* A more in-depth modification allows to match several different damage types with every possible character stat (7 total in-battle stats). Maybe for an elemental creatures battle where every stat is instead an "elemental affinity", and for some reason the player's gotta catch 'em all.
@@ -531,6 +547,27 @@ ____________________________________
 
 #### In-game dynamic properties
 
+These are dynamic variable-like properties who's values get overwritten at different stages trhough the game. Changing their values does nothing short of presenting a bug here or there (like the turn number count, the flag settings altering expected behavior, etc.)
+
+| **Property** | **Format** | **Description** |
+| --- | --- | --- |
+| boolAdvancedGame | boolean | True when the advanced game was selected. |
+| boolCharSelected | boolean | True when the player character was selected. |
+| boolOppSelected | boolean | True when the opponent was selected. |
+| boolBattleBegan | boolean | True when the first battle is started. |
+| boolBattleInProgress | boolean | True when any battle is started. |
+| arGameCharacters | array | Temporary characters for current game. |
+| intCharIndex | integer | Index of the selected player character within arGameCharacters. |
+| arCharSkills | array | Skills array of the player character for the current battle. |
+| arCharBuffs | array | Buffs array of the player character. |
+| intOppIndex | integer | Index of the selected opponent within arGameCharacters. |
+| arOppSkills | array | Skills array of the opponent for the current battle. |
+| arOppBuffs | array | Buffs array of the opponent for the current battle. |
+| boolBattleNomove | boolean | For skill special effect "nomove". Makes the target skip it's turn. |
+| boolBattleNocounter | boolean | For skill special effect "nocounter". Makes the target skip it's counter. |
+| boolBattleNodefense | boolean | For skill special effect "nodefense". Ignores target's defense. |
+| intBattleTurnCount| integer | Keeps track of the number of turns per game. |
+| arCharSkillsCooldown | array | Stores skills cooldowns for cross-battle use. |
 
 ____________________________________
 
