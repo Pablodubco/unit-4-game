@@ -1809,6 +1809,7 @@ var RPGBattle = {
             var arTooltips = [this.strTooltipHP,this.strTooltipAttackBasic,this.strTooltipCounterBasic];
             var arMaxTotals = [this.mMaxProperty(this.arCharacters,"intMaxHP"),this.mMaxProperty(this.arCharacters,"intAttack"),this.mMaxProperty(this.arCharacters,"intCounter")];
             var arValueNow = [charObject.intMaxHP,charObject.intAttack,charObject.intCounter];
+            var arValueDisplay = [charObject.intMaxHP,charObject.intAttack,charObject.intCounter];
             for(i = 0; i < arStatText.length; i++){//Loop to build all stat progress bars
                 var divProgress = $("<div>",{class:"progress "+strDivProgressclass, style:"padding: 1px"}); //Div for progress bars
                 var divProgressBar = $("<div>",{ //Progress bars
