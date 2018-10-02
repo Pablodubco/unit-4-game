@@ -428,7 +428,7 @@ var RPGBattle = {
         {
             skName: "PoisonSlash", 
             skNameDisplay: "Poison Slash",
-            skDescription: "A dangerous slashing attack. Uses 60% of Attack and Speed for power. Poisons the target, reducing HP by 3% each turn for 3 turns.",
+            skDescription: "A dangerous slashing attack. Uses 60% of Attack and Speed for power. Poisons the target, reducing HP by 4% each turn for 3 turns.",
             skBtnColorClass: "btn-success",
             skTextDisplayAction: "uses",
             skTextDisplaySkill: "Poison Slash", 
@@ -447,7 +447,7 @@ var RPGBattle = {
             skMethodAssist: 0,
             skMethodTurn: function(skillObject,casterObject, rivalObject,skMethodAssist){}, 
             skMethodSpecial: function(skillObject,casterObject, rivalObject,skMethodAssist){
-                var damage = Math.ceil(rivalObject.intMaxHP*0.03);
+                var damage = Math.ceil(rivalObject.intMaxHP*0.04);
                 var buffObject = {
                     skName: "Poison",
                     skNameDisplay: "Poison",
