@@ -108,7 +108,7 @@ ______________________________________________
    1. Bootstrap v4 row `<div>` that will contain the skill buttons for the player.
    1. Bootstrap v4 column `<div>` that will be updated with the battle messages each turn.
 * Assign the suitable ids of your choice to each section.
-* Include 5 Bootstrap v4 buttons in the HTML file. It's important for the buttons to have the appropriate Bootstrap v4 **_.btn_** class that will allow the game code to enable and disable them depending on which phase it's running. The 6 buttons will do the following actions:
+* Include 5 Bootstrap v4 buttons in the HTML file. It's important for the buttons to have the appropriate Bootstrap v4 **_.btn_** class that will allow the game code to enable and disable them depending on which phase it's running. The 5 buttons will do the following actions:
    1. Select character.
    1. Re-roll characters.
    1. Re-select character.
@@ -206,7 +206,7 @@ window.onload = function(){
     });
 
     btnPlayBasic.on("click",function(){//Begin advanced game
-        RPGBattle.mGameModeStart("basic");
+        RPGBattle.mGameModeStart("advanced");
     });
 }
 ```
@@ -598,7 +598,7 @@ ___________________________________________________
 Specify character objects inside the **_arCharacters_** array of the [game properties](#game-flow-and-properties). 
 
 - [Character object properties](#character-object-properties)
-- [Character stat properties](#character-stat-poperties)
+- [Character stat properties](#character-stat-properties)
 
 | [Game properties index](#game-flow-and-properties) | [Main index](#contents) |
 | :---: | :---: |
@@ -617,7 +617,7 @@ Each character object has the following poperties:
 | Images | string | **_strImgPortrait_**, **_strImgProfile_** and **_strImgBattle_** properties. The path of the image assets that serve as the portrait, the profile and the battle pic respectively (in the current implementation, profile pic is the same as the battle pic). |
 | Default Skills | string | **_strDefaultSkill_**, **_strDefaultCounter_**, and **_strDefaultFollow_**. The id name of the default skills for attacking, counter attacking, and doing a follow-up attack respectively. See [skills section](#skills-collection) for details. |
 | arSkills | string array | A list of skills that can be learnt at specified character level breaks.
-| arSkillLevels | integer array | A list of character level breaks for learning the skills in the **_arSkills_** array property. Must have the same order, a preferably, the same length |
+| arSkillLevels | integer array | A list of character level breaks for learning the skills in the **_arSkills_** array property. Must have the same order, and the same length as the **_arSkills_** array, otherwise, the latest index skills won't be added if no matching level break is found. |
 
 | [Character index](#characters-collection) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |
@@ -642,10 +642,7 @@ There are 3 sets of 7 stat properties (21 properties total) for every character.
 >**NOTE:** Although the stat property names should remain unchanged (sans replacing the new names everywhere in the code), what they do, how they interact with the skills, and how they are displayed in the UI, is completely configurable. Except for HP and Speed that have a specified default behavior in the game logic, the other 5 stats are just values to be used for inflicting and reducing damage.
 >* Specify how stats will be named (displayed to the player) in the [display elements settings](#display-elements-settings) section.
 >* The rules that define damage types and defensive stats to reduce damage are defined in the _[arDmgTypeAttackProp](#stats-and-skills-settings)_ and _[arDmgTypeDefenseProp](#stats-and-skills-settings)_ game properties. 
->* The rules that define damage types and offensive stats are set inside each skill's individual properties. For example, even if you specify a "weapon" damage type for a skill, you can use the "magic" or "intelligence" as the skills offensive stats.
-
-The displayed names of the stats can be changed by altering the [display strings](#display-elements-settings) game properties.
-The way they interact with skills
+>* The rules that define damage types and offensive stats are set inside each [skill's individual properties](#skill-properties). For example, even if you specify a "weapon" damage type for a skill, you can use the "magic" or "intelligence" as the skills offensive stats.
 
 **Base stats intBase+Stat (intBaseHP, intBaseAttack, intBaseCounter, etc)**
 
@@ -663,9 +660,11 @@ The way they interact with skills
    * Additional base stat points gained on character level up are applied proportionally to the original base stat distribution.
    * The resulting game stat value for any given stat is calculated as follows:
 
-    game stat = (base stat multiplier)*(base stat)*(
+```
+game stat = (base stat multiplier)*(base stat)*(
             1 + (intGameCharLevelStatGain)*(character level)/(sum of all base stats for the character)
         )
+```
                     
 So, if the game property **_intGameCharLevelStatGain_** value is 0, or the character level is 0, the game stat value is:
 
@@ -688,7 +687,9 @@ ___________________________________________________
 
 ##### Skills collection
 
-Skills are assigned to each character inside the [character's skill properties](#characters-collection). They are used to determine the available actions of the player and opponent in every turn. All actions in battle are skill objects, including the defaul attack, counter-attack, and follow-up attack.
+* Skills are assigned to each character inside the [character's skill properties](#characters-collection). 
+* They are used to determine the available actions of the player and opponent in every turn. 
+* All actions in battle are skills, including the default attack, counter-attack, and follow-up attack.
 
 Contents:
 - [Skill properties](#skill-properties)
@@ -725,7 +726,7 @@ Every skill has the following properties:
 | skDamageStatSecondary| string | Caster's second stat property to use in damage calculations |
 | skDamageMultPrimary | integer |Caster's first stat multiplier |
 | skDamageMultSecondary | integer |Caster's second stat multiplier |
-| skSpecialEffect | array | //"none","nocounter","nodefense","nomove","first","last","buff","method" |
+| skSpecialEffect | array | _"none","nocounter","nodefense","nomove","first","last","buff"_, or _"method"_. See [special effects section](#special-effects) for details. |
 | skChargeTime | integer |Number of turns before it can be cast. |
 | skCooldown | integer |Dynamic, changing it doesn't affect behavior. When 0, the skill can be cast again. |
 | skTurnRemaining | integer |Either the duration of a [buff](#buffs) or the number of turns that [skMethodTurn](#skills-methods) will be executed. |
@@ -750,9 +751,11 @@ _________________________________________________
    * Any other string will ignore defensive stats. The string WILL be displayed in the battle log (ie _"unblockable"_ damage).
 5. The damage calculation is:
 
+```
     damage = ([skDamageStatPrimary] * [skDamageMultPrimary]) of the caster 
         + ([skDamageStatSecondary] * [skDamageMultSecondary]) of the caster
         - defensive stat of the target
+```
 
 For example the Attack skill damage calculation in the current implementation is:
 
@@ -766,11 +769,12 @@ __________________________________________________
 
 **Special effects**
 
-* Specify preset special effects inside the **_skSpecialEffect_** array property, these don't affect the battle log text. More than one special effect can be included inside the array: 
+* These are built in preset special effects that can be assigned to skills for altering default mechanics, such as turn order, damage calculation, triggered attacks (like counter attacks), etc.
+* Specify preset special effects inside the **_skSpecialEffect_** array property, these don't affect the battle log text for the damage message. More than one special effect can be included inside the array: 
    * _"none"_ for none. If there is a single "none" in the array, all other effects are ignored.
-   * _"nocounter"_ prevents counter from the rival on the turn it's used.
+   * _"nocounter"_ prevents counter from the rival on the turn it's used. Displays a "couldn't counter attack" message in the battle log.
    * _"nodefense"_ ignores target's defensive stat on damage calculations.
-   * _"nomove"_ skip the target's turn (doesn't prevent counter attacks).
+   * _"nomove"_ skip the target's turn if it acts before the target (doesn't prevent counter attacks). Displays a "was too overwhelmed to make a move" message in the battle log.
    * _"first"_ always moves first.
    * _"last"_ always moves last.
    * _"method"_ runs the function specified in the **_[skMethodSpecial](#skills-methods)_** property when the skill is cast.
@@ -846,7 +850,7 @@ _________________________________________________________________
 
 **skMethodSpecial**
 
-Runs whenever the skill is cast and _"method"_ is inside the skSpecialEffect string array.
+Runs whenever the skill is cast and _"method"_ is inside the **_skSpecialEffect_** string array.
 
 
 **skMethodTurn**
