@@ -93,7 +93,7 @@ ______________________________________________
 
 ### Setting up the HTML file sections
 
-* For implementing the game, include [Bootstrap v4](http://getbootstrap.com/docs/4.1/getting-started/introduction/) with the javascript plugins, [jQuery](https://jquery.com/) for dynamic elements, and [Popper.js](https://popper.js.org/) for tooltips (all og them available at the Bootstrap v4 link).
+* For implementing the game, include [Bootstrap v4](http://getbootstrap.com/docs/4.1/getting-started/introduction/) with the javascript plugins, [jQuery](https://jquery.com/) for dynamic elements, and [Popper.js](https://popper.js.org/) for tooltips (all of them available at the Bootstrap v4 link).
 * Next, add the following 12 sections (tags) to your HTML file:
    1. Bootstrap v4 row `<div>` that will contain the characters selection portraits.
    1. Bootstrap v4 row `<div>` that will contain the opponents selection portraits.
@@ -125,18 +125,18 @@ The game code looks for these specific variable names to add the dynamically gen
 
 For the HTML sections, in order:
 
-1. rowDivCharSelect
-1. rowDivOppSelect
-1. rowDivCharInfo
-1. rowDivOppInfo
-1. rowDivCharSkills
-1. rowDivOppSkills
-1. colDivCharFight
-1. colDivOppFight
-1. colDivCharBuff
-1. colDivOppBuff
-1. rowDivSkill
-1. colDivBattlelog
+1. **rowDivCharSelect:** will contain the characters selection portraits.
+1. **rowDivOppSelect:** will contain the opponents selection portraits.
+1. **rowDivCharInfo:** will contain the selected character's info profile, bio, and stats.
+1. **rowDivOppInfo:** will contain the selected opponent's info profile, bio, and stats.
+1. **rowDivCharSkills:** will contain the selected character's skills info.
+1. **rowDivOppSkills:** will contain the selected opponent's skills info.
+1. **colDivCharFight:** will contain the selected character's battle pic and hit points for battle.
+1. **colDivOppFight:** will contain the selected opponent's battle pic and hit points for battle.
+1. **colDivCharBuff:** will contain the selected character's active buffs during battle.
+1. **colDivOppBuff:** will contain the selected opponent's active buffs during battle.
+1. **rowDivSkill:** will contain the skill buttons for the player.
+1. **colDivBattlelog:** will be updated with the battle messages each turn.
 
 Example:
 
@@ -285,9 +285,9 @@ The game has 6 distinct phases:
 * By clicking on each character's portrait, display: 
    * The profile info, with bio and the stats card: calls the methods [mCreateInfoPic](#dynamic-elements-methods), [mCreateInfoCards](#dynamic-elements-methods), and [mDisplayInfoCard](#dynamic-elements-methods).
    * For the advanced game, display the character skills: method [mDisplayInfoSkills](#dynamic-elements-methods).
-Two buttons are provided: _Re-roll characters_, and _Select character_.
-* Clicking on the _Select character_ button advances the game phase to the [opponent selection phase](#opponent-selection-phase). Calls the method [mGamePlaceOpponents](#game-flow-methods) to move the unselected character portraits to the opponent selection area.
-* Clicking the _Re-roll characters_ button calls the method [mGameRollCharacters](#game-flow-methods) and stays in the character selection phase.
+* Two buttons are provided: _Re-roll characters_, and _Select character_.
+   * Clicking on the _Select character_ button advances the game phase to the [opponent selection phase](#opponent-selection-phase). Calls the method [mGamePlaceOpponents](#game-flow-methods) to move the unselected character portraits to the opponent selection area.
+   * Clicking the _Re-roll characters_ button calls the method [mGameRollCharacters](#game-flow-methods) and stays in the character selection phase.
 
 | [Game flow index](#understanding-the-game-flow) | [Game properties index](#game-flow-and-properties) |
 | :---: | :---: |

@@ -1368,7 +1368,7 @@ var RPGBattle = {
 //==================================================================================================================//
 //-------------------------------------------------------------Game flow methods.
     mGameModeStart: function(mode){ //Main game flow function, called when choosing a game mode.
-        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#charSelect";
+        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#charSelect"; //Jump the window view to the character selection screen
         else window.location.hash = "charSelect";
         //Clear game areas
         rowDivCharSelect.empty(); //Clears the Character selection
@@ -1508,11 +1508,8 @@ var RPGBattle = {
     
     mGamePlaceOpponents: function(charIndex){ //Moves the non-selected characters to the opponents area. Select character (Reroll) <= => [[Select Opponent (Reselect Character)]] => Begin Battle (Win,Lose) => Restart
         var RPGBattle = this;
-        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) { //Jump the window view to the character selection screen
-            window.location.href = "#oppSelect";
-        } else {
-            window.location.hash = "oppSelect";
-        }
+        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#oppSelect"; //Jump the window view to the opponent selection screen
+        else window.location.hash = "oppSelect";
         RPGBattle.boolOppSelected = false; //Opponent selected flag to false
         this.intCharIndex = charIndex;
         btnReroll.attr("disabled",""); //Disables "Reroll character button"
@@ -1572,11 +1569,8 @@ var RPGBattle = {
 
     mGameReselect:function(charIndex){//At opponent selection, returns all characters to the character selection area. Select character (Reroll) <= => Select Opponent [[(Reselect character)]] => Battle (Win,Lose) => Restart
         var RPGBattle = this;
-        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) { //Jump the window view to the character selection screen
-            window.location.href = "#charSelect";
-        } else {
-            window.location.hash = "charSelect";
-        }
+        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#charSelect"; //Jump the window view to the character selection screen
+        else window.location.hash = "charSelect";
         this.boolCharSelected = false; //Sets character selected flag to false
         btnReselect.attr("disabled",""); //Disables "Reselect character" button
         btnBegin.attr("disabled",""); //Disables "Begin battle" button
@@ -1617,7 +1611,7 @@ var RPGBattle = {
     },
 
     mGameRestart:function(){
-        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#charSelect";
+        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#charSelect"; //Jump the window view to the character selection screen
         else window.location.hash = "charSelect";
         colDivBattlelog.empty(); //Clears the battlelog area
         if(this.boolAdvancedGame) this.mGameModeStart("advanced"); //Begin game with the last selected game mode
@@ -1628,7 +1622,7 @@ var RPGBattle = {
         var RPGBattle = this;
         if(!this.boolBattleBegan){
         }
-        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#battleArea";
+        if (navigator.userAgent.match(/Chrome|AppleWebKit/)) window.location.href = "#battleArea"; //Jump the window view to the battle screen
         else window.location.hash = "battleArea";
         this.boolBattleInProgress = true; //Sets battle in progress flag
     //Button control and clicker control
