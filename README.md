@@ -581,8 +581,8 @@ ____________________________________
 
 There are 2 collections: 
 
-* Character objects.
-* Skill objects.
+* [Character objects](#characters-collection).
+* [Skill objects](#skills-collection).
 
 Each have their own set of properties that affect the way they interact with each other, as well as containing settings for displaying dynamically created elements (images, color settings, etc).
 
