@@ -1829,6 +1829,8 @@ var RPGBattle = {
         var RPGBattle = this;
         var charIndex = this.arGameCharacters.indexOf(charObject);
         var hpPercent = Math.ceil(100*charObject.intCurrHP/charObject.intMaxHP);
+        var hpCurrent = charObject.intCurrHP;
+        var hpMax = charObject.intMaxHP;
         var strSpanBarBattleText = this.strSpanBarBattleText;
         var strDivBarBattle = this.strDivBarBattle;
     //Creates DOM object variable with bootsrap v4 classes
@@ -1844,9 +1846,6 @@ var RPGBattle = {
                     $("<div>",{
                         class:"udHPbar progress-bar "+RPGBattle.strBarBattleHP,
                         role:"progressbar",
-                        "aria-valuenow":"140",
-                        "aria-valuemin":"0",
-                        "aria-valuemax":"200",
                         style:"width:"+hpPercent+"%",
                         udcharindex:charIndex
                     }),

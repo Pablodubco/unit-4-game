@@ -220,7 +220,7 @@ window.onload = function(){
 > 1. Change the skill names, descriptions, color classes, effects and strengths in the [skills collection](#skills-collection) array and add them to the [characters' skill arrays](#characters-collection).
 > 1. Adjust the [general game properties](#general-game-settings-and-parameters), to change how many characters play, how they level up, how many stats they gain uppon leveling up, etc.
 > 1. Give it a visual change by modifying the display strings and styling classes in the [display elements properties settings](#display-elements-settings).
-> If feeling up to it, add [skills with special methods]() to do all sorts of things, or alter the [game methods](#methods) to mess with the game logic.
+> If feeling up to it, add [skills with special methods](#skill-methods) to do all sorts of things, or alter the [game methods](#methods) to mess with the game logic.
 
 [Back to index](#implementing)
 
@@ -345,7 +345,7 @@ The game object code is organized into the following sections:
 
 1. **[General game settings and parameters](#general-game-settings-and-parameters):** a list of properties that change the general behavior of the game.
 1. **[Display elements settings](#display-elements-settings):** a list of properties that specify the classes for dynamically generated elements, mostly for styling purposes.
-1. **[Stats and skills settings](#stats-and-skills-settings):** a list of properties used as tools for storing information. Modifying these won't have any effect.
+1. **[Stats and skills settings](#stats-and-skills-settings):** a list of properties that affect the values of stats and how they interact with each other, including damage types and defensive stats for each damage type.
 1. **[In-game dynamic properties](#in-game-dynamic-properties):** a list of properties used as tools for storing information. Modifying these won't have any effect.
 1. **[Collections](#collections):** the master collections of [characters](#characters-collection) and [skill objects](#skills-collection). Lists and explains their properties.
 1. **[Methods](#methods):** the in-game functions.
