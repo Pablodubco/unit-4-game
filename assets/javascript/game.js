@@ -38,6 +38,19 @@ window.onload = function(){
     btnPlayAdvanced.on("click",function(){      //Begin advanced game
         RPGBattle.mGameModeStart("advanced");
     });
+
+// Preload and cache images for more agile response on first play
+    var imgArray = []; //Array to store character portrait and profile pics.
+    for (var i = 0; i < RPGBattle.arCharacters.length; i++){ // Loops the game object character array
+        imgArray.push(RPGBattle.arCharacters[i].strImgPortrait);
+        imgArray.push(RPGBattle.arCharacters[i].strImgProfile);
+    }
+    $.preloadImages = function(imgArray) { // Function to preload images
+        for (var i = 0; i < imgArray.length; i++) { // Loops through the image array
+          $("<img/>").attr("src", imgArray[i]).appendTo("body").css("display","none"); // Creates an image div with the source, inserts it into DOM and hides it
+        }
+    }
+    $.preloadImages(imgArray); // Calls the function
 }
 
 //=================================== Game Object Code =======================================//
